@@ -39,13 +39,17 @@ const ProductList = () => {
       userId: "yash",
     };
 
-    const response = await fetch("http://localhost:5000/api/events/buy-click", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(eventPayload),
-    });
+    // const response = await fetch("http://localhost:5000/api/events/buy-click", {
+    const response = await fetch(
+      "https://useranalytics-kakfa-producer.onrender.com/api/events/buy-click",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventPayload),
+      }
+    );
     console.log(`Product ${id} buy clicked and event sent!`);
     console.log(response);
   };
@@ -87,7 +91,7 @@ const ProductList = () => {
         userId: "yash",
       };
       const response = await fetch(
-        "http://localhost:5000/api/events/product-view",
+        "https://useranalytics-kakfa-producer.onrender.com/api/events/product-view",
         {
           method: "POST",
           headers: {
