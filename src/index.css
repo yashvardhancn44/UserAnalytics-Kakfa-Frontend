@@ -64,3 +64,8 @@ h1 {
 .buy-button:hover {
   background-color: darkblue;
 }
+
+/* .buy-button:focus,
+.buy-button:active {
+  background-color: darkblue;
+} */

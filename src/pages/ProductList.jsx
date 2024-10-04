@@ -19,7 +19,7 @@ const ProductList = () => {
 
   const MIN_HOVER_TIME = 3000;
 
-  const handleBuyClick = async (id) => {
+  const handleBuyClick = async (event, id) => {
     /*
     // Initial testing setup, to update the local data. 
     const updatedProducts = products.map((product) =>
@@ -31,6 +31,8 @@ const ProductList = () => {
     console.log(`Product ${id} buy clicked!`);
     console.log(products[id - 1]);
     */
+    event.preventDefault();
+
     const timestamp = new Date().toISOString();
     const eventPayload = {
       productId: id,
@@ -52,6 +54,7 @@ const ProductList = () => {
     );
     console.log(`Product ${id} buy clicked and event sent!`);
     console.log(response);
+    // event.target.blur();
   };
 
   const handleMouseEnter = (id) => {
@@ -124,9 +127,12 @@ const ProductList = () => {
             </div>
             <button
               className="buy-button"
-              onClick={() => {
-                handleBuyClick(product.id);
+              onClick={(event) => {
+                handleBuyClick(event, product.id);
               }}
+              // onTouchEnd={(event) => {
+              //   handleBuyClick(event, product.id);
+              // }}
             >
               Buy
             </button>
