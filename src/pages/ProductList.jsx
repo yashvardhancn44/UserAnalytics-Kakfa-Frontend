@@ -96,6 +96,7 @@ const ProductList = () => {
           body: JSON.stringify(eventPayload),
         }
       );
+      console.log(`Product ${id} product viewed and event sent!`);
       console.log(response);
     }
   };

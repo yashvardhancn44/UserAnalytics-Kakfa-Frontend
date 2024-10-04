@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   ResponsiveContainer,
   CartesianGrid,
@@ -23,6 +24,38 @@ const initialProducts = [
 ];
 
 const Dashboard = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:3000/api/products");
+      const data = await response.json();
+      setProducts(data);
+    };
+    fetchData();
+
+    const socket = new WebSocket("ws://localhost:8080");
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      if (data.product) {
+        const updateProduct = (prevProducts, updatedProduct) => {
+          return prevProducts.map((prod) =>
+            prod.id === updatedProduct.id ? updatedProduct : prod
+          );
+        };
+
+        setProducts((prevProducts) =>
+          updateProduct(prevProducts, data.product)
+        );
+      }
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, []);
+
   return (
     <div>
       <h1>Dashboard</h1>
