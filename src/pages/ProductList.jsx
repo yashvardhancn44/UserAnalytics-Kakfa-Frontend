@@ -102,34 +102,33 @@ const ProductList = () => {
   };
 
   return (
-    <div>
-      <h1>Products</h1>
-      <Link to="/dash">View Dashboard</Link>
-      <ul>
+    <div className="products-container">
+      <h1>Products Page</h1>
+      {/* <Link to="/dash" className="dashboard-link">
+        View Dashboard
+      </Link> */}
+      <div className="products-grid">
         {products.map((product) => (
-          <li
-            style={{
-              marginBottom: "20px",
-              border: "1px solid #ccc",
-              padding: "10px",
-            }}
+          <div
+            className="product-card"
             key={product.id}
             onMouseEnter={() => handleMouseEnter(product.id)}
             onMouseLeave={() => handleMouseLeave(product.id)}
           >
-            <div>
-              <strong>{product.name}</strong> - ${product.price}
+            <div className="product-info">
+              <strong>{product.name}</strong> - ₹ {product.price}
             </div>
             <button
+              className="buy-button"
               onClick={() => {
                 handleBuyClick(product.id);
               }}
             >
               Buy
             </button>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
